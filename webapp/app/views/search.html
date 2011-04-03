@@ -49,7 +49,7 @@ $def show_stats():
     $if center:
         Resolved
         <strong>$center.place</strong> in $center.state, $center.country
-        <strong>$center_hits.time</strong> sec.
+        in <strong>$center_hits.time</strong> sec.
     $else:
         Could not resolve location: "$query"
     </p>
@@ -80,6 +80,7 @@ $def show_about():
     <p>The geocoding is limited to cities, zip codes or to some places in world. It does not geocode full addresses.</p>
     <p>Feel free to <a href="https://github.com/alexksikes/sGeo">download</a> the package and test it on your webapp.</p>
     <p>sGeo was first built in late 2007 in order to geocode in batch the contractor database of <a href="http://www.chiefmall.com">Chiefmall</a>.</p>
+    <p>Make your own geocoder by getting the <a href="https://github.com/alexksikes/sGeo">source code</a>.</p>
     
 <div id="search_box">
 $:show_search_box()
