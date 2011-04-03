@@ -6,7 +6,7 @@ sGeo
 
 sGeo is a very simple minimalistic geocoder built around [Geonames](http://www.geonames.org/), [zip-codes.com](http://www.zip-codes.com/) and [Sphinx](http://sphinxsearch.com/). You can try to geocode any place in the world or just restrict it to US cities and zip codes. sGeo will not geocode full addresses as they are not available in Geonames. It will only geocode cities, zip codes or places such as national parks, universities, etc ... sGeo was first written in late 2007 to batch geocode the contractor database used in [Chiefmall](http://www.chiefmall.com). 
 
-Feel free to try a [demo](http://sgeo.ksikes.net).
+Feel free to try a [demo](http://sgeo.ksikes.org).
 
 2. Installation
 ---------------

@@ -10,7 +10,7 @@
 
 * [Geonames](http://download.geonames.org/export/dump/)
 * [Zip Codes](http://www.zip-codes.com), purchase a license (~$40) 
-* [GeoIP](http://www.maxmind.com/app/geolitecity), get the light version or purchase pro
+* [MaxMind GeoIP](http://www.maxmind.com/app/geolitecity), get the light version or purchase pro
 
 NOTE: GeoIP is optional.
 NOTE: You may want to download Geonames to ./data/geonames and zip-codes to ./data/zipcodesdotcom. 
@@ -40,7 +40,7 @@ Create the required tables and load the data:
 * [Sphinx](http://sphinxsearch.com/downloads/), the search engine
 * [webpy](http://webpy.org/download), for the web interface and other tools
 * [fsphinx](http://github.com/alexksikes/fsphinx/tarball/master), easy faceted search for sphinx and more
-* [GeoIP](http://www.maxmind.com/app/python), IP geolocation (optional)
+* [GeoIP python API](http://www.maxmind.com/app/python), IP geolocation (optional)
     
 5. Setup Sphinx
 ================
