@@ -1,0 +1,23 @@
+﻿TODO:
+
+[*] empty queries that lead to full scan mode
+ >> the search is restricted within the state and country
+[*] problem with encoding
+[*] problems with zip codes
+[*] should we also index the kind?
+[*] google maps with markers
+[*] problems with searching into special fields (feature_code)
+[*] handle zero results ip, zip and places
+[*] change db name geonames2
+[*] scroll bar problem (http://ksikes.net:8080/search?usa=True&q=home)
+[*] load newest geonames db
+[*] json with http://ksikes.net:8080/search?usa=True&q=los+angeles
+[*] explanation under that you can type ip, zip, or places
+[*] about section
+[*] documentation
+[*] create repository
+[*] search logs
+ >> use data/sph_logs/query.log
+[ ] implement get_locations_batch
+ >> fpshinx must implement add_query instead
+[ ] mispellings (use soundex stemmer and/or aspell)

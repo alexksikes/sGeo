@@ -1,0 +1,119 @@
+﻿$def with (query, center_hits, nearby_hits, pager, recent_queries)
+
+$ center = listget(center_hits['matches'], 0, {}).get('@hit')
+
+$def show_search_box():
+    <div class="title">
+        <h1><a href="/">sGeo</a></h1>
+        <h2>Yet Another Simple GeoCoder!</h2>
+    </div>
+    
+    <form method="get" action="search" id="search_form">
+    
+    <div class="choice">
+    <input type="radio" name="usa" value="True" $cond(query_param('usa'), 'checked=', '')>US Cities or Zips
+    <input type="radio" name="usa" value="" $cond(not query_param('usa'), 'checked=', '')>World Places
+    </div>
+    
+    <div class="search"><input type="text" name="q" size="28" value="$query"></div>
+    <div class="submit"><input type="submit" value="Search"/></div>
+    </form>
+
+$def show_hit(hit, i):
+    $ lat, lon = (radian_to_degree(hit.lat), radian_to_degree(hit.lon))
+    <tr class=$cond(i%2 == 0, '', 'odd')>
+        $ num = pager.start + i + 1
+        $ pnum = cond(num < 10, '0%s' % num, num)
+        $ pnum = cond(num > 100, 'blank', pnum)
+        <td class='num'>
+        <img onclick="showInfoWindow($i)" src="http://google-maps-icons.googlecode.com/files/red$(pnum).png" alt="$num"/>
+        </td>
+        <td class='place'>$hit.place
+        </td>
+        <td class='kind'>$hit.kind
+        <br/><small></small>
+        </td>
+	</tr>
+
+$def show_paging():
+    <ul class="paging list">
+    $if pager.left_a is not False:
+        <li><a href="$changequery(s=pager.left_a)">&laquo;</a></li>   
+    $if pager.right_a is not False:
+        <li><a href="$changequery(s=pager.right_a)">next 100 places &raquo;</a></li>
+    </ul>
+
+$def show_stats():
+    <p class="resolved">
+    <img onclick="showInfoWindow(-1)" src="/img/orangeblank.png"/>
+    $if center:
+        Resolved
+        <strong>$center.place</strong> in $center.state, $center.country
+        <strong>$center_hits.time</strong> sec.
+    $else:
+        Could not resolve location: "$query"
+    </p>
+    <p class="nearby">
+    <img src="http://google-maps-icons.googlecode.com/files/redblank.png"/>
+    Found <strong>$nearby_hits.total_found</strong> nearby 
+    places in <strong>$nearby_hits.time</strong> sec.
+    </p>
+
+$def show_map():
+    <p class="refresh">
+    <a class="animated" href="$changequery()">refresh map</a>
+    </p>
+    
+    <div id="map_canvas"></div> 
+    <script src="http://maps.google.com/maps?file=api&v=2&key=$get_google_map_key()&oe=utf-8" type="text/javascript"></script>
+    <script src="/js/map.js" type="text/javascript"></script>
+    $# resize and do not wait for the DOM to be fully ready
+    <script>resize($$('#map_canvas'))</script>
+    
+    $ center_coords = [radian_to_degree(center.lat), radian_to_degree(center.lon)]
+    $ places_coords = [[radian_to_degree(m['@hit'].lat), radian_to_degree(m['@hit'].lon)] for m in nearby_hits]
+    $ places_names = [m['@hit'].place for m in nearby_hits]
+    <script>drawMap($center_coords, $:json.dumps(center.place), $places_coords, $:json.dumps(places_names), $pager.start)</script>
+
+$def show_about():
+    <p>sGeo is a very simple minimalistic geocoder built around <a href="http://www.geonames.org/">geonames</a>, <a href="http://www.zip-codes.com/">zip-codes.com</a> and <a href="http://sphinxsearch.com/">Sphinx</a>.</p>
+    <p>The geocoding is limited to cities, zip codes or to some places in world. It does not geocode full addresses.</p>
+    <p>Feel free to <a href="https://github.com/alexksikes/sGeo">download</a> the package and test it on your webapp.</p>
+    <p>sGeo was first built in late 2007 in order to geocode in batch the contractor database of <a href="http://www.chiefmall.com">Chiefmall</a>.</p>
+    
+<div id="search_box">
+$:show_search_box()
+</div>
+
+<div id="stats">
+$:show_stats()
+</div>
+
+<div id="content">
+
+<div id="about">
+$:show_about()
+</div>
+
+$:show_paging()
+
+<div id="panel_right">
+$# resize and do not wait for the DOM to be fully ready
+<script>resize($$('#panel_right'))</script>
+    <table id='results'>
+    $for i, match in enumerate(nearby_hits):
+        $:show_hit(match['@hit'], i)
+    </table>
+</div>
+
+<div id="panel_left">
+$if center_hits.total:
+    $:show_map()
+</div>
+    
+</div>
+
+<ul id="info" class="list">
+    <li id="toggle_about"><a href="#">About</a></li> |
+    <li><a href="https://github.com/alexksikes/sGeo">Get the source code &raquo;</a></li>
+</ul>

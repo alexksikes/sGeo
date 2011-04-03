@@ -1,0 +1,225 @@
+/* defaults */
+* {
+	margin: 0pt;
+	padding: 0pt;
+}
+
+body {
+	color: #333333;
+	font-family: verdana,sans-serif;
+	font-size: 12px;
+}
+
+a img {
+    border : 0pt none;
+}
+
+a {
+    color : #0000CC;
+}
+
+.list li {
+	display : inline;
+	list-style-type : none;
+	margin-left : 2px;
+	margin-right : 2px;
+}
+
+a.animated {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a.animated:hover {
+	text-decoration: underline;
+}
+/* defaults */
+
+/* search box */
+#search_box {
+    margin-left: 30px; 
+    margin-top: 5px;
+    margin-bottom: 8px;
+    overflow: auto;
+}
+
+.title {
+    float: left;
+    text-align: center;
+    width: 150px;
+}
+
+.title h1 a {
+	text-decoration: none;
+	color: #372cd2;
+	font-size: 24px;
+}
+
+.title h2 {
+	font-size: 12px;
+    font-weight: normal;
+}
+
+#search_form {
+    float: left;
+    position: relative;
+    top: 5px;
+    left: 10px;
+}
+
+.choice {
+    margin-left: 2px;
+    margin-bottom: 2px;
+}
+
+.choice input {
+    margin: 3px 3px;
+}
+
+#search_form .search, #search_form .submit{
+    margin-left: 5px;
+    float: left;
+}
+
+.search input {
+    padding: 4px;
+    width: 250px;
+}
+
+.submit input {
+    width: 70px;
+    height: 26px;
+}
+/* search box */
+
+/* stats, paging, refresh, info */
+#stats {
+    clear: both;
+    margin-left: 8px;
+    height: 38px;
+}
+
+#stats img {
+    width: 16px;
+    position: relative;
+    top: 4px;
+}
+
+.paging {
+    clear: both;
+    float: right;
+    margin-bottom: 3px;
+    margin-right: 3px;
+    height: 14px;
+}
+
+.refresh {
+    text-align: right;
+    margin-bottom: 3px;
+    margin-right: 3px;    
+}
+
+.refresh a {
+    background: url("/img/arrow-circle-double-135.png") no-repeat left;
+    padding-left: 18px;
+}
+
+#info {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+}
+/* stats, paging, refresh, info */
+
+/* about and main content div */
+#about {
+    display: none;
+    background: #FFE9CF;
+    border: 1px solid #EE9D40;
+	margin-top: 17px;
+    margin-bottom: 10px;
+    width: 278px;
+    padding: 5px;
+    padding: 0px 5px;
+    float: right;
+    font-size: 11px;
+}
+
+#about p {
+    margin: 5px 0px;
+}
+
+#toggle_about a {
+    background: url("/img/question-frame.png") no-repeat left;
+    padding-left: 20px;
+    padding-bottom: 2px;
+}
+
+
+#content {
+    clear: both;
+    margin-top: -17px;
+    padding: 5px;
+    padding-top: 8px;
+    padding-left: 8px;
+}
+/* about and main content div */
+
+/* map panel */
+#panel_left {
+    /*height: 800px;*/
+    margin-right: 300px;
+    /*overflow: auto;*/
+}
+
+#map_canvas {
+    height: 800px;
+    border: 1px solid #336699;
+}
+/* map panel */
+
+/* nearby results panel */
+#panel_right {
+    clear: both;
+    float: right;
+    width: 290px;
+    overflow: auto;
+}
+
+#results {
+    font-size: 7pt;
+    width: 100%;
+	border-collapse: collapse;
+	margin: auto;
+	font-size: 12px;
+    border-top: 1px solid #336699;
+	border-bottom: 1px solid #336699;
+	border-left: 1px solid #336699;
+}
+
+#results tr {
+    max-height: 35px;
+}
+
+#results td { 
+	font-weight: normal;
+	padding: 4px;
+    padding-right: 0px;
+    text-align: left;
+}
+
+#results .num img{
+    cursor: pointer;
+}
+
+#results .kind {
+	width: 15%;
+    text-align: right;
+    padding-right: 4px;
+    padding-left: 0px;
+}
+
+#results .odd {
+	background: #d3e6fa none repeat scroll 0%;
+}
+/* nearby results panel */
