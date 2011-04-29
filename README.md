@@ -16,6 +16,8 @@ Read [INSTALL.md](https://github.com/alexksikes/sGeo/blob/master/INSTALL.md) for
 3. How to use within your code
 ------------------------------
 
+Here is an example of how you would use sGeo in your code:
+
     import sgeo
     gc = sgeo.GeoCoder(usa_only=True)
     
@@ -37,6 +39,8 @@ Read [INSTALL.md](https://github.com/alexksikes/sGeo/blob/master/INSTALL.md) for
     
 4. Use command line interface for testing
 -----------------------------------------
+
+sGeo supports a command line interface for testing purposes.
 
     python sgeo/sgeo/sg_cli.py --usa-only 'Newport Beach, CA'
     
