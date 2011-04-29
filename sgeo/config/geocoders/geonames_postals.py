@@ -4,7 +4,7 @@ import sphinxapi
 from sgeo.config import db
 
 # create sphinx client
-cl = fsphinx.SphinxClientSQL()
+cl = fsphinx.FSphinxClient()
 
 # connect to searchd
 cl.SetServer('localhost', 9312)
@@ -19,7 +19,7 @@ cl.SetSortMode(sphinxapi.SPH_SORT_EXTENDED, '@relevance desc')
 cl.SetFieldWeights(dict(postal_code=40))
 
 # sql query to fetch the hits
-cl.SetSQLQuery(db, '''
+db_fetch = fsphinx.DBFetch(db, sql = '''
 select
     id,
     "geonames.postals" as source_db,
@@ -38,6 +38,7 @@ left join country_info as c on
 where id in ($id)
 order by field(id, $id)'''
 )
+cl.AttachDBFetch(db_fetch)
 
 # by default only this index will be queried
 cl.SetDefaultIndex('geonames_postals')

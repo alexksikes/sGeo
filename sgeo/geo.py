@@ -1,3 +1,5 @@
+# should probably be renamed sgeo.py and remove __init__.py
+
 import fsphinx
 import math
 import new
@@ -25,7 +27,7 @@ RADIUS = 25 * 1000
 class GeoCoder(object):
     def __init__(self, listen='', usa_only=False):
         def make_client(config):
-            return fsphinx.make_client_from_config(config)
+            return fsphinx.FSphinxClient.FromConfig(config)
         if usa_only:
             self.cl_place = make_client(geonames_P_US)
             self.cl_zip = make_client(zipcodes_US)
@@ -66,8 +68,8 @@ class GeoCoder(object):
     def get_hits_from_ip(self, ip):
         coords = get_coords_from_ip(ip)
         if coords:
-            return fsphinx.Hits(dict(total=1, total_found=1, 
-                matches=[{'@hit':coords, 'id':0, 'weight':0, 'attrs':{}}]))
+            return web.storage(total=1, total_found=1, time=0,
+                matches=[{'@hit':coords, 'id':0, 'weight':0, 'attrs':{}}])
         else:
             return fsphinx.Hits()
             
@@ -82,25 +84,11 @@ def set_location(cl, lat, lon, radius=RADIUS, exclude=False):
         cl.SetFilterFloatRange('@geodist', 0.0, 0.0, exclude=True)
     
 def get_nearby_places(lat, lon, query, radius=RADIUS, exclude=False, offset=0, limit=10):        
-    cl = fsphinx.make_client_from_config(nearby_places)
+    cl = fsphinx.FSphinxClient.FromConfig(nearby_places)
     cl.SetLimits(offset, limit)
     set_location(cl, lat, lon, radius, exclude)
     return cl.Query(query)
 
-#class GeoQuery(fsphinx.ParsedQuery):
-#    _reserved = ['address', 'lat', 'lon']
-#    
-#    def __init__(self, query):
-#        fsphinx.ParsedQuery.__init__(self, query)
-#        self.address = self.get_term('address')
-#        self.lat = float(self.get_term('lat', 0))
-#        self.lon = float(self.get_term('lon', 0))
-#    
-#    @property
-#    def sphinx_query(self):
-#        s = [q.sphinx_query for q in self if q.field not in GeoQuery._reserved]
-#        return ' '.join(s).strip()
-    
 def is_zip_code(zip):
     m = re.search('\s*(\d{5}(?:[\-]\d{4})?)\s*', zip, re.I)
     if m:

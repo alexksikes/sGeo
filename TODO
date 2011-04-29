@@ -18,6 +18,11 @@
 [*] create repository
 [*] search logs
  >> use data/sph_logs/query.log
+[ ] release fsphinx
+[ ] promote sGeo
+ >> http://groups.google.com/group/geonames/topics
+ >> http://forum.geonames.org/gforum/recentTopics/list.page
+ >> Sphinx
 [ ] implement get_locations_batch
  >> fpshinx must implement add_query instead
 [ ] mispellings (use soundex stemmer and/or aspell)

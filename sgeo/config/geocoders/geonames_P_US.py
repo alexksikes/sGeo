@@ -4,7 +4,7 @@ import sphinxapi
 from sgeo.config import db
 
 # create sphinx client
-cl = fsphinx.SphinxClientSQL()
+cl = fsphinx.FSphinxClient()
 
 # connect to searchd
 cl.SetServer('localhost', 9312)
@@ -15,11 +15,8 @@ cl.SetMatchMode(sphinxapi.SPH_MATCH_EXTENDED2)
 # sorting and possible custom sorting function
 cl.SetSortMode(sphinxapi.SPH_SORT_EXPR, '@weight * population')
 
-# some fields could matter more than others
-cl.SetFieldWeights(dict(place=4))
-
-## sql query to fetch the hits
-cl.SetSQLQuery(db, '''
+# sql query to fetch the hits
+db_fetch = fsphinx.DBFetch(db, sql = '''
 select 
     g.id,
     "geonames" as source_db,
@@ -49,6 +46,7 @@ left join features as f on
 where id in ($id)
 order by field(id, $id)'''
 )
+cl.AttachDBFetch(db_fetch)
 
 # by default only this index will be queried
 cl.SetDefaultIndex('geonames_P_US')

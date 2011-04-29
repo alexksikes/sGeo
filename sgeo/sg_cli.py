@@ -25,7 +25,6 @@ import sys
 def run(place, listen='', usa=False, limit=1, nearby=0):
     gc = sgeo.GeoCoder(listen=listen, usa_only=usa)
     center = gc.get_locations(place, limit=limit)
-    print center
     
     hits = gc.get_hits()
     print 'Found the following locations:'
