@@ -11,8 +11,8 @@ $def show_search_box():
     <form method="get" action="search" id="search_form">
     
     <div class="choice">
-    <input type="radio" name="usa" value="True" $cond(query_param('usa'), 'checked=', '')>US Cities or Zips
     <input type="radio" name="usa" value="" $cond(not query_param('usa'), 'checked=', '')>World Places
+    <input type="radio" name="usa" value="True" $cond(query_param('usa'), 'checked=', '')>US Cities or Zips
     </div>
     
     <div class="search"><input type="text" name="q" size="28" value="$query"></div>

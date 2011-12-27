@@ -17,7 +17,7 @@ class index:
         if not sgeo.get_coords_from_ip(location):
             location = 'Palo Alto, CA'
         
-        raise web.seeother('/search?q=%s&usa=True' % location)    
+        raise web.seeother('/search?q=%s' % location)    
         
 class search:
     def GET(self):
